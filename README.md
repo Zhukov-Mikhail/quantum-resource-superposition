@@ -36,10 +36,15 @@ Quantum Resource Superposition Manager — инструмент, который 
 
 ## Быстрый старт
 #### Вариант 1: Использование GitHub Pages
+
 Ваш экземпляр автоматически доступен по адресу: https://ваш-логин.github.io/quantum-resource-superposition
+
 Просто откройте ссылку в браузере и начните оптимизацию.
+
 #### Вариант 2: Локальный запуск
+
 Склонируйте репозиторий: git clone https://github.com/ваш-логин/quantum-resource-superposition.git
+
 Откройте файл index.html в любом браузере.
 
 ## Технические детали

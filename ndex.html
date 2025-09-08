@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quantum Resource Superposition Manager</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <div class="superposition-icon">
+                    <div class="wave"></div>
+                    <div class="wave"></div>
+                    <div class="wave"></div>
+                </div>
+                <h1>Quantum Resource Superposition Manager</h1>
+            </div>
+            <p class="tagline">Управление ресурсами на квантовом уровне</p>
+        </header>
+        
+        <div class="main-content">
+            <div class="setup-panel">
+                <h2>Настройка проекта</h2>
+                
+                <div class="input-group">
+                    <label for="projectFile">Загрузите проект (JSON):</label>
+                    <input type="file" id="projectFile" accept=".json">
+                    <div class="sample-links">
+                        <a href="#" onclick="loadSampleProject('it')">Пример: IT проект</a> |
+                        <a href="#" onclick="loadSampleProject('marketing')">Пример: Маркетинговая кампания</a>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label>Доступные ресурсы:</label>
+                    <div class="resources-grid">
+                        <div class="resource-item">
+                            <span class="resource-icon">👨‍💻</span>
+                            <input type="number" id="devCount" value="5" min="1"> Разработчики
+                        </div>
+                        <div class="resource-item">
+                            <span class="resource-icon">🎨</span>
+                            <input type="number" id="designCount" value="2" min="0"> Дизайнеры
+                        </div>
+                        <div class="resource-item">
+                            <span class="resource-icon">📊</span>
+                            <input type="number" id="analystCount" value="1" min="0"> Аналитики
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="input-group">
+                    <label>Параметры оптимизации:</label>
+                    <div class="slider-container">
+                        <label>Балансировка: <span id="balanceValue">75</span>%</label>
+                        <input type="range" id="balanceSlider" min="50" max="100" value="75">
+                    </div>
+                    <div class="slider-container">
+                        <label>Приоритет: 
+                            <select id="prioritySelect">
+                                <option value="time">Минимизация сроков</option>
+                                <option value="cost" selected>Минимизация стоимости</option>
+                                <option value="quality">Максимизация качества</option>
+                            </select>
+                        </label>
+                    </div>
+                </div>
+                
+                <button id="runOptimization" class="primary-btn">
+                    <span class="icon">🌀</span> Запустить квантовую оптимизацию
+                </button>
+                
+                <div id="status" class="status-panel"></div>
+            </div>
+            
+            <div class="results-panel" id="resultsPanel" style="display:none;">
+                <h2>Результаты оптимизации</h2>
+                
+                <div class="metrics-grid">
+                    <div class="metric-card">
+                        <div class="metric-label">Уровень суперпозиции</div>
+                        <div class="metric-value" id="superpositionLevel">0%</div>
+                        <div class="metric-description">Оптимальное использование возможностей</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Вероятность коллапса</div>
+                        <div class="metric-value" id="collapseProbability">0%</div>
+                        <div class="metric-description">Риски дефицита ресурсов</div>
+                    </div>
+                    <div class="metric-card">
+                        <div class="metric-label">Эффективность</div>
+                        <div class="metric-value" id="efficiency">0%</div>
+                        <div class="metric-description">Улучшение по сравнению с базовым планом</div>
+                    </div>
+                </div>
+                
+                <div class="visualization-container">
+                    <div class="tabs">
+                        <button class="tab-btn active" data-tab="allocation">Распределение ресурсов</button>
+                        <button class="tab-btn" data-tab="timeline">Временная шкала</button>
+                        <button class="tab-btn" data-tab="superposition">Квантовая визуализация</button>
+                        <button class="tab-btn" data-tab="recommendations">Рекомендации</button>
+                    </div>
+                    
+                    <div id="allocationView" class="tab-content active">
+                        <div id="resourceAllocation" class="chart"></div>
+                    </div>
+                    
+                    <div id="timelineView" class="tab-content" style="display:none;">
+                        <div id="resourceTimeline" class="chart"></div>
+                    </div>
+                    
+                    <div id="superpositionView" class="tab-content" style="display:none;">
+                        <div id="quantumSuperposition" class="chart"></div>
+                        <p class="quantum-explanation">
+                            Визуализация квантовой суперпозиции ресурсов. Каждая точка представляет возможное состояние распределения ресурсов. 
+                            Яркие области показывают оптимальные квантовые состояния.
+                        </p>
+                    </div>
+                    
+                    <div id="recommendationsView" class="tab-content" style="display:none;">
+                        <div class="recommendations-list" id="recommendationsList"></div>
+                    </div>
+                </div>
+                
+                <div class="action-buttons">
+                    <button id="exportPDF" class="secondary-btn">
+                        <span class="icon">📥</span> Экспорт отчета PDF
+                    </button>
+                    <button id="adjustResources" class="primary-btn">
+                        <span class="icon">🛠️</span> Настроить распределение
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <footer>
+            <p>Quantum Resource Superposition Manager v1.0 &copy; 2025 | Управление ресурсами на квантовом уровне</p>
+        </footer>
+    </div>
+    
+    <script src="qrs-engine.js"></script>
+    <script src="resource-visualization.js"></script>
+</body>
+</html>
